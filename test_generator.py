@@ -29,6 +29,41 @@ class TestGenerator(unittest.TestCase):
         print("Please Enter STRING VALUE")
         self.assertEqual(get_password_length(), 8)
 
+    def test_combo_default_invalid(self):
+        """
+        Test the combination choice method. enter invalid data to get all TRUE output
+        """
+        print(" ")
+        print("Please Enter NON TRUE/FALSE VALUES")
+        self.assertEqual(password_combination_choice(), [True, True, True])
+
+    def test_combo_default_empty(self):
+        """
+        Test the combination choice method. no entries (" ") to get all TRUE output
+        """
+        print(" ")
+        print("Please Enter NO VALUES")
+        self.assertEqual(password_combination_choice(), [True, True, True])
+
+    def test_combo_one_invalid(self):
+        """
+        Test the combination choice method. enter one invalid entry to get all TRUE output
+        """
+        print(" ")
+        print("Please Enter ONE INVALID ENTRY")
+        self.assertEqual(password_combination_choice(), [True, True, True])    
+
+    def test_passgen_NONE(self):
+        """
+        Should return message asking to restart program and value of none
+        """
+        default_length = 12
+        all_false      = [False, False, False]
+
+        self.assertEqual(password_generator(all_false, default_length),  None)
+
+
+
 
 if __name__ == '__main__':
     unittest.main()

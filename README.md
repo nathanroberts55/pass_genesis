@@ -10,3 +10,8 @@
 <p>Takes user input and checks password against list of commonly used passwords. User password is passed to the pwnedpassword API for comparison. For more details about the pwnedpassword API click <a href="https://www.troyhunt.com/ive-just-launched-pwned-passwords-version-2/">here</a></p>
 
 
+<h2>Test_Generator.py</h2>
+<p>Test cases written to check the basic functionality of password generator methods.</p>
+
+<h2>Test_Common_Pass.py</h2>
+<p>Test cases written to check the basic functionality of common password checker methods.</p>
