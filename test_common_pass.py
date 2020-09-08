@@ -2,6 +2,10 @@ import unittest
 import hashlib
 from common_pass import get_password, hash_password, check_common_passlist
 
+    """
+        Unit Testing Documentation (Real Python): https://realpython.com/python-testing/#writing-your-first-test
+        Unit Test Module Documentation          : https://docs.python.org/3/library/unittest.html
+    """
 class TestCommonPass(unittest.TestCase):
     def test_get_password(self):
         """

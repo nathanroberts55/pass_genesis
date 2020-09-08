@@ -1,6 +1,10 @@
 import unittest
 from generator import get_password_length, password_combination_choice, password_generator
 
+    """
+        Unit Testing Documentation (Real Python): https://realpython.com/python-testing/#writing-your-first-test
+        Unit Test Module Documentation          : https://docs.python.org/3/library/unittest.html
+    """
 class TestGenerator(unittest.TestCase):
     def test_default_length(self):
         """
