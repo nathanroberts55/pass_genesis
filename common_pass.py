@@ -1,3 +1,7 @@
+"""
+Author: Nate Roberts
+Created: September 6, 2020
+"""
 import requests
 from requests.exceptions import HTTPError
 import hashlib
@@ -6,6 +10,8 @@ import hashlib
 hashlib Documentation               : https://docs.python.org/2/library/hashlib.html
 request.Reponse Object Documentation: https://www.w3schools.com/python/ref_requests_response.asp
 Reponse JSON parsing Pynative       : https://pynative.com/parse-json-response-using-python-requests-library/
+pwned passwords API documentation   : https://haveibeenpwned.com/API/v2#PwnedPasswords
+pwned passwords overview            : https://www.troyhunt.com/ive-just-launched-pwned-passwords-version-2/
 """
 
 
@@ -15,7 +21,7 @@ def get_password():
     Returns:
         string: password they would like to check
     """
-
+    
     user_password = str(input('Please enter the password you would like to check: ')).strip()
     return user_password
 

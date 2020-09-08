@@ -21,7 +21,7 @@ def get_password_length():
     Returns:
         int : Desired length of the password
     """
-
+    
     length = str(input('How long would should the password be?: ')).strip(" ")
 
     try:
