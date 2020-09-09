@@ -7,18 +7,17 @@ from password_strength import PasswordStats
 
 """
     Password Strength Python Module Documentation: https://pypi.org/project/password-strength/
+    Password Strength Python Module Github       : https://github.com/kolypto/py-password-strength
 """
 
 # TODO: Ask if there is a specific policy password
-
-
 def get_password_policy():
     want_polcy = str(
         input('Is there a password policy requirement (Please enter True or False): '))
 
     try:
         want_policy = eval(want_polcy.strip().title())
-        return want_polcy
+        return want_policy
 
     except SyntaxError as s:
         print('Invalid value. Please use either \"True\" or \"False\" as values')
@@ -28,10 +27,9 @@ def get_password_policy():
         print('Invalid value. Please use either \"True\" or \"False\" as values')
         print('Invalid Values will assumed as False')
         return False
+
 # TODO: If yes, fill in the password policy fields
-
-
-def get_password_policy(bool_policy):
+def get_password_policy_rules(bool_policy):
     default_policy = PasswordPolicy.from_names(
         length     = 8, # min length: 8
         uppercase  = 2, # need min. 2 uppercase letters
@@ -66,6 +64,8 @@ def get_password_policy(bool_policy):
         except SyntaxError as s:
             print("Invalid Entry: Default of 8 length, 2 uppercase, 2 numbers, 2 special, and 2 non letters will be entered")
             return default_policy
+    
+    return None
 
 # TODO: Take in the users password
 def get_user_password():
@@ -93,33 +93,37 @@ def password_strength(password):
 
 # TODO: If there is a password policy, return feedback on the password against the password policy
 def policy_feedback(password, policy):
-    LENGTH     = "You password fails to meet the length requirement specified by your policy\n"
-    UPPERCASE  = "You password fails to meet the uppercase requirement specified by your policy\n"
-    NUMBERS    = "You password fails to meet the numbers requirement specified by your policy\n"
-    SPECIAL    = "You password fails to meet the special requirement specified by your policy\n"
-    NONLETTERS = "You password fails to meet the nonletter requirement specified by your policy\n"
-
-    policy_feedback = ''
-    
     if policy:
         password_report = password_vs_policy(password, policy)
-    
+
+    # Holders for the for loop, tracking the policy failures and the index for the failure list
+    password_feedback = ''
+    failure_number    = 0
+
+
     if len(password_report) == 0:
-        print('Your password meets all of the requirements set by the policy!')
+        password_feedback += "Your password meets all policy requirements\n"
+    else:
+        for failure in password_report:
+            password_feedback += f'Your password fails to meet the {password_report[failure_number]} requirement specified by your policy\n'
+            failure_number    += 1
+        
 
-    policy_feedback = ''
-    # policy_feedback += LENGTH if f'Length({policy.length})' password_report    
+    return password_feedback
 
 
-### BEGIN TEST SECTION
-default_policy = PasswordPolicy.from_names(
-        length     = 8, # min length: 8
-        uppercase  = 2, # need min. 2 uppercase letters
-        numbers    = 2, # need min. 2 digits
-        special    = 2, # need min. 2 special character need min. 
-        nonletters = 2, # 2 non-letter characters (digits, specials, anything)
-    )
+if __name__ == "__main__":
+    # Ask the user if there is a password policy
+    is_password_policy = get_password_policy()
+    # If there is a password policy, then get the specifications for the password policy
+    password_policy    = get_password_policy_rules(is_password_policy)
+    # Get the user's password they want to test 
+    user_password      = get_user_password()
 
-print(default_policy.test[0][0])
-### END TEST SECTION
+    # If there is a password policy, see if the user's password meets the policy requirements
+    if is_password_policy: 
+        print(policy_feedback(user_password, password_policy))
+
+    # Tests the strength of the password
+    password_strength(user_password)
 
