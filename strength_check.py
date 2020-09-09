@@ -80,8 +80,46 @@ def password_vs_policy(password, policy):
 # TODO: Return the password strength
 def password_strength(password):
     stats = PasswordStats(password)
+    strength = stats.strength()
+
+    if strength >= 0.80:
+        print("This is a very strong password!")
+    elif strength >= 0.50 and strength <= 0.80:
+        print("This is a medium strength password. Consider increasing complexity.")
+    else:
+        print("This is a weak password. Highly consider increasing the complexity")
+    
+    return strength 
+
 # TODO: If there is a password policy, return feedback on the password against the password policy
+def policy_feedback(password, policy):
+    LENGTH     = "You password fails to meet the length requirement specified by your policy\n"
+    UPPERCASE  = "You password fails to meet the uppercase requirement specified by your policy\n"
+    NUMBERS    = "You password fails to meet the numbers requirement specified by your policy\n"
+    SPECIAL    = "You password fails to meet the special requirement specified by your policy\n"
+    NONLETTERS = "You password fails to meet the nonletter requirement specified by your policy\n"
+
+    policy_feedback = ''
+    
+    if policy:
+        password_report = password_vs_policy(password, policy)
+    
+    if len(password_report) == 0:
+        print('Your password meets all of the requirements set by the policy!')
+
+    policy_feedback = ''
+    # policy_feedback += LENGTH if f'Length({policy.length})' password_report    
 
 
-password = PasswordStats("password123")
-print(password.strength())
+### BEGIN TEST SECTION
+default_policy = PasswordPolicy.from_names(
+        length     = 8, # min length: 8
+        uppercase  = 2, # need min. 2 uppercase letters
+        numbers    = 2, # need min. 2 digits
+        special    = 2, # need min. 2 special character need min. 
+        nonletters = 2, # 2 non-letter characters (digits, specials, anything)
+    )
+
+print(default_policy.test[0][0])
+### END TEST SECTION
+
