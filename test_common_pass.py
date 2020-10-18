@@ -1,3 +1,8 @@
+"""
+Author: Nate Roberts
+Created: September 6, 2020
+"""
+
 import unittest
 import hashlib
 from unittest.mock import patch
